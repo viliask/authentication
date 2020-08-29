@@ -22,13 +22,17 @@ class ApiController extends AbstractFOSRestController
         $arrayIterator = new RecursiveArrayIterator($tree);
         $recursiveIterator = new RecursiveIteratorIterator($arrayIterator, \RecursiveIteratorIterator::SELF_FIRST);
 
-        foreach ($recursiveIterator as $key => $value) {
-            if (is_array($value) && array_key_exists('id', $value)) {
-                $value['name'] = 'Zdrowie i uroda';
-                $currentDepth = $recursiveIterator->getDepth();
-                for ($subDepth = $currentDepth; $subDepth >= 0; $subDepth--) {
-                    $subIterator = $recursiveIterator->getSubIterator($subDepth);
-                    $subIterator->offsetSet($subIterator->key(), ($subDepth === $currentDepth ? $value : $recursiveIterator->getSubIterator(($subDepth+1))->getArrayCopy()));
+        foreach ($list as $el) {
+            $categoryId = intval($el['category_id']);
+            $name = $el['translations']['pl_PL']['name'];
+            foreach ($recursiveIterator as $key => $value) {
+                if (is_array($value) && array_key_exists('id', $value) && $value['id'] === $categoryId) {
+                    $value['name'] = $name;
+                    $currentDepth = $recursiveIterator->getDepth();
+                    for ($subDepth = $currentDepth; $subDepth >= 0; $subDepth--) {
+                        $subIterator = $recursiveIterator->getSubIterator($subDepth);
+                        $subIterator->offsetSet($subIterator->key(), ($subDepth === $currentDepth ? $value : $recursiveIterator->getSubIterator(($subDepth+1))->getArrayCopy()));
+                    }
                 }
             }
         }
