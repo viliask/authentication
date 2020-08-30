@@ -19,6 +19,13 @@
                                     <tr>
                                         <td>{{ user.id }}</td>
                                         <td>{{ user.username }}</td>
+                                        <td>
+                                            {% if user.disabled %}
+                                                <a href="{{ path('user_activate', {'id': user.id})}}">enable</a>
+                                            {% else %}
+                                                <a href="{{ path('user_deactivate', {'id': user.id})}}">disable</a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </table>
