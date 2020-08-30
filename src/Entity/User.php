@@ -34,6 +34,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $disable;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +110,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getDisable(): ?bool
+    {
+        return $this->disable;
+    }
+
+    public function setDisable(bool $disable): self
+    {
+        $this->disable = $disable;
+
+        return $this;
     }
 }
