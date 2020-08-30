@@ -74,6 +74,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
 
+        if ($user->isDisabled()) {
+            throw new CustomUserMessageAuthenticationException('User is disabled.');
+        }
+
         return $user;
     }
 
