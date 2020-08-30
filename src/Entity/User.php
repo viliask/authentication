@@ -37,7 +37,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $disable;
+    private $disabled;
 
     public function getId(): ?int
     {
@@ -112,14 +112,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getDisable(): ?bool
+    public function isDisabled(): ?bool
     {
-        return $this->disable;
+        return $this->disabled;
     }
 
-    public function setDisable(bool $disable): self
+    public function setDisabled(bool $disabled): self
     {
-        $this->disable = $disable;
+        $this->disabled = $disabled;
 
         return $this;
     }
