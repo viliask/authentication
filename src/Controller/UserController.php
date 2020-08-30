@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user")
+     * @Route("/", name="user", methods="GET")
      */
-    public function index(UserRepository $userRepository)
+    public function index(UserRepository $userRepository): Response
     {
         $users = $userRepository->findAll();
 
