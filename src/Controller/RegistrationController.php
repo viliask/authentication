@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
-            $user->setDisable(false);
+            $user->setDisabled(false);
             $user->setRoles(['ROLE_USER']);
 
             $em = $this->getDoctrine()->getManager();
